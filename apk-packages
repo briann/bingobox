@@ -3,6 +3,7 @@ alpine-keys
 apk-tools
 atuin
 bash
+bat
 binutils
 binutils-gold
 bubblewrap
@@ -17,6 +18,7 @@ deno
 diffutils
 emacs
 expat
+fd
 findmnt
 findutils
 fzf
