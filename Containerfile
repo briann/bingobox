@@ -13,6 +13,9 @@ RUN apt-get update && \
     rm -rd /var/lib/apt/lists/*
 RUN rm /extra-packages
 
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+RUN brew install git
+
 RUN ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
