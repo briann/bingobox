@@ -5,7 +5,6 @@ atuin
 bash
 binutils
 binutils-gold
-brew
 bubblewrap
 build-base
 busybox
