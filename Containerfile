@@ -11,6 +11,7 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
         $(cat /extra-packages | xargs) && \
     rm -rd /var/lib/apt/lists/*
+RUN rm /extra-packages
 
 RUN ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
