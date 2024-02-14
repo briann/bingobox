@@ -28,11 +28,9 @@ RUN mkdir -p /usr/local/bin  && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/htop && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/iotop && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/powertop && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/intel_gpu_top && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/virt-top && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/tailscale && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/glances && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/code
 
 # Change root shell to BASH
