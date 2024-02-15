@@ -70,6 +70,7 @@ ncurses-terminfo-base
 net-tools
 nodejs-20
 openjdk-21
+openssh
 openssh-client
 pigz
 pkgconf
