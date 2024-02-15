@@ -31,6 +31,7 @@ RUN mkdir -p /usr/local/bin  && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/virt-top && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/tailscale && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/glances && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/ujust && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/code
 
 # Change root shell to BASH
