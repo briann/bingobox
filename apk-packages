@@ -4,6 +4,7 @@ apk-tools
 atuin
 bash
 bat
+bind-tools
 binutils
 binutils-gold
 bubblewrap
