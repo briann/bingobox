@@ -23,16 +23,18 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 
 # Make some symlinks
 RUN mkdir -p /usr/local/bin  && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/code && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/glances && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/htop && \
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/op && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/htop && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/virt-top && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/tailscale && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/glances && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/ujust && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/code
+    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/virt-top && \
+    true
 
 # Change root shell to BASH
 RUN sed -i -e '/^root/s/\/bin\/ash/\/bin\/bash/' /etc/passwd
