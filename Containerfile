@@ -1,6 +1,6 @@
 FROM archlinux:base-devel
 
-RUN pacman -Syu --noconfirm git &&\
+RUN pacman -Syu --noconfirm git rust &&\
     useradd -m makepkg_user
 USER makepkg_user
 RUN cd $HOME &&\
