@@ -7,7 +7,6 @@ LABEL com.github.containers.toolbox="true" \
 
 COPY ./arch-packages /tmp
 RUN pacman -Syu --needed --noconfirm - < /tmp/arch-packages
-RUN rm -rf /tmp/*
 RUN yes | pacman -Scc
 
 RUN mkdir -p /tmp/yay-build
@@ -16,8 +15,7 @@ RUN useradd -m -G wheel builder && passwd -d builder
 RUN chown -R builder:builder /tmp/yay-build
 RUN su - builder -c "git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-build/yay-bin && \
     cd /tmp/yay-build/yay-bin && \
-    makepkg -si --noconfirm && \
-    rm -rf /tmp/yay-build"
+    makepkg -si --noconfirm"
 RUN su - builder -c "yay -Syu --needed --noconfirm - < /tmp/yay-build/aur-packages"
 
 # Get Distrobox-host-exec and host-spawn
@@ -49,5 +47,5 @@ RUN mkdir -p /usr/local/bin  && \
 # Use and configure bash, retrieve bash-prexec
 RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh -o /tmp/bash-prexec && \
     mkdir -p /usr/share/ && \
-    cp /tmp/bash-prexec /usr/share/bash-prexec && \
-    rm -rf /tmp/*
+    cp /tmp/bash-prexec /usr/share/bash-prexec
+RUN rm -rf /tmp/*
