@@ -1,16 +1,20 @@
-FROM cgr.dev/chainguard/wolfi-base:latest
+FROM quay.io/toolbx/arch-toolbox:latest
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
       summary="bingo's distrobox" \
       maintainer="brian@bngo.dev"
 
-COPY ./files /
-RUN apk update && apk upgrade
+RUN pacman -Syyu --noconfirm git base-devel
+RUN git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && \
+    cd /tmp/yay-bin && \
+    makepkg -si --noconfirm && \
+    rm -rf /tmp/yay-bin
 
-# Add optional packages
-COPY ./apk-packages /tmp
-RUN grep -v '^#' /tmp/apk-packages | xargs apk add
+COPY ./arch-packages /tmp
+RUN yay -Syyu --needed --noconfirm - < /tmp/arch-packages
+RUN rm -rf /tmp/*
+RUN yes | yay -Scc
 
 # Get Distrobox-host-exec and host-spawn
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
@@ -24,7 +28,6 @@ RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/dis
 
 # Make some symlinks
 RUN mkdir -p /usr/local/bin  && \
-    ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/code && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/glances && \
@@ -39,19 +42,8 @@ RUN mkdir -p /usr/local/bin  && \
     ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/wl-paste && \
     true
 
-# Change root shell to BASH
-RUN sed -i -e '/^root/s/\/bin\/ash/\/bin\/bash/' /etc/passwd
-
 # Use and configure bash, retrieve bash-prexec
 RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh -o /tmp/bash-prexec && \
     mkdir -p /usr/share/ && \
     cp /tmp/bash-prexec /usr/share/bash-prexec && \
-    rm -rf /tmp/*
-
-# Setup su-exec and fake sudo
-RUN [ -e /sbin/su-exec ] && \
-    chmod u+s /sbin/su-exec && \
-    [ ! -e /usr/bin/sudo ] && \
-    printf "%s\n%s" '#!/bin/sh' '/sbin/su-exec root "$@"' > /usr/bin/sudo && \
-    chmod +x /usr/bin/sudo && \
     rm -rf /tmp/*
