@@ -7,6 +7,7 @@ bat
 bind-tools
 binutils
 binutils-gold
+brew
 bubblewrap
 build-base
 busybox

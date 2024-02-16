@@ -5,6 +5,7 @@ LABEL com.github.containers.toolbox="true" \
       summary="bingo's distrobox" \
       maintainer="brian@bngo.dev"
 
+COPY ./files /
 RUN apk update && apk upgrade
 
 # Add optional packages
@@ -40,6 +41,12 @@ RUN mkdir -p /usr/local/bin  && \
 
 # Change root shell to BASH
 RUN sed -i -e '/^root/s/\/bin\/ash/\/bin\/bash/' /etc/passwd
+
+# Use and configure bash, retrieve bash-prexec
+RUN curl https://raw.githubusercontent.com/rcaloras/bash-preexec/master/bash-preexec.sh -o /tmp/bash-prexec && \
+    mkdir -p /usr/share/ && \
+    cp /tmp/bash-prexec /usr/share/bash-prexec && \
+    rm -rf /tmp/*
 
 # Setup su-exec and fake sudo
 RUN [ -e /sbin/su-exec ] && \
