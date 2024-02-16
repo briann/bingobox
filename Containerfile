@@ -16,7 +16,7 @@ RUN chown -R builder:builder /tmp/yay-build
 RUN su - builder -c "git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-build/yay-bin && \
     cd /tmp/yay-build/yay-bin && \
     makepkg -si --noconfirm"
-RUN yay -Syu --needed --noconfirm - < /tmp/yay-build/aur-packages
+RUN yay -Syu --needed --noconfirm --noconfirm --diffmenu=false --editmenu=false --useask=false --cleanmenu=false - < /tmp/yay-build/aur-packages
 
 # Get Distrobox-host-exec and host-spawn
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
