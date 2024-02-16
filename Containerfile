@@ -6,7 +6,7 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="brian@bngo.dev"
 
 COPY ./arch-packages /tmp
-RUN pacman -Syyu --needed --noconfirm - < /tmp/arch-packages
+RUN pacman -Syu --needed --noconfirm - < /tmp/arch-packages
 RUN rm -rf /tmp/*
 RUN yes | pacman -Scc
 
