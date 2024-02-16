@@ -5,16 +5,10 @@ LABEL com.github.containers.toolbox="true" \
       summary="bingo's distrobox" \
       maintainer="brian@bngo.dev"
 
-RUN pacman -Syyu --noconfirm git base-devel
-RUN git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin && \
-    cd /tmp/yay-bin && \
-    makepkg -si --noconfirm && \
-    rm -rf /tmp/yay-bin
-
 COPY ./arch-packages /tmp
-RUN yay -Syyu --needed --noconfirm - < /tmp/arch-packages
+RUN pacman -Syyu --needed --noconfirm - < /tmp/arch-packages
 RUN rm -rf /tmp/*
-RUN yes | yay -Scc
+RUN yes | pacman -Scc
 
 # Get Distrobox-host-exec and host-spawn
 RUN git clone https://github.com/89luca89/distrobox.git --single-branch /tmp/distrobox && \
