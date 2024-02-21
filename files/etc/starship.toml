@@ -7,5 +7,4 @@ success_symbol = '[\$](bold green dimmed)'
 error_symbol = '[\$](bold red)'
 
 [container]
-symbol='📦'
 format='[$symbol](bold blue dimmed) '
